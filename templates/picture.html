@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Main Page
+{% endblock %}
+
+{% block body %}
+    <img src="{{url_for('static', filename=picture)}}"width="500"/>
+{% endblock %}

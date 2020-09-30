@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Main Page
+{% endblock %}
+
+{% block body %}
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+
+    <form action="" method="post">
+    <p>
+        <label for="username">Topic</label>
+        <input type="text" name="topic">
+    </p>
+    <p>
+        <input type="submit">
+    </p>
+    </form>
+{% endblock %}

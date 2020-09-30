@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Main Page
+{% endblock %}
+
+{% block body %}
+    {% for article in articles%}
+        <h3>{{article.title}}</h3>
+        <p>{{article.description}}</p>
+        <a href="{{article.url}}">{{article.url}}</a>
+        <img src="{{article.urlToImage}}"/>
+        <a href="{{ url_for('show_picture', topic=topic, id=loop.index) }}">Instagram2Storyfy</a>
+    {% endfor %}
+{% endblock %}
