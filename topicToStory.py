@@ -15,7 +15,7 @@ def createImage(topic, loc):
     sys.tracebacklimit = 0
     location = loc - 1
 
-    newsapi = NewsApiClient(api_key='87f90668eabb44b98fa88a4f007804b5')
+    newsapi = NewsApiClient(api_key='be667b6da1734020a35b7c340f255a28')
     # articleTopic = input('Enter Topic:')
     all_articles = newsapi.get_everything(q=topic)
 

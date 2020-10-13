@@ -1,7 +1,11 @@
 {% extends "layout.html" %}
 
+{% block topnav%}
+<a class="active" href="{{ url_for('index') }}">Home</a>
+{% endblock %}
+
 {% block title %}
-    Main Page
+   New Topic
 {% endblock %}
 
 {% block body %}
@@ -11,7 +15,7 @@
 
     <form action="" method="post">
     <p>
-        <label for="username">Topic</label>
+        <label for="username">Article Topic:</label>
         <input type="text" name="topic">
     </p>
     <p>

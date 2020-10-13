@@ -1,15 +1,32 @@
 {% extends "layout.html" %}
 
+{% block topnav%}
+<a href="{{ url_for('index') }}">Home</a>
+<span class = "title">
+    Topic: {{topic}}
+</span>
+
+{% endblock %}
+
 {% block title %}
-    Main Page
+    {{topic}}
 {% endblock %}
 
 {% block body %}
     {% for article in articles%}
-        <h3>{{article.title}}</h3>
-        <p>{{article.description}}</p>
-        <a href="{{article.url}}">{{article.url}}</a>
-        <img src="{{article.urlToImage}}"/>
-        <a href="{{ url_for('show_picture', topic=topic, id=loop.index) }}">Instagram2Storyfy</a>
+
+        <div class = "card">
+            <img src="{{article.urlToImage}}" alt="{{article.title}}"/>
+            <div class="container">
+            <p>
+                <a class = "title" href="{{article.url}}">{{article.title}}</a>
+                <p>{{article.description}}</p>
+                <a class="asButton" href="{{ url_for('show_picture', topic=topic, id=loop.index) }}" >Make Instagram Story</a>
+            </p>
+            </div>
+        </div>
+        <p></p>
+
+
     {% endfor %}
 {% endblock %}

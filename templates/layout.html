@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>{% block title %}{% endblock %}</title>
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"> -->
-    </head>
-    <body>
-        <a href="{{ url_for('index') }}">Home</a>
-        <div class="container">
-            {% block body %}
-            {% endblock %} 
-        </div>
-    </body>
-</html>
+<link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
+<title>{% block title %}{% endblock %} - Story2Insta </title>
+ <div class = page>
+     <div class = "topnav">
+         {% block topnav %}
+         <!--<a href="{{ url_for('index') }}">Home</a>-->
+         {% endblock %}
+
+         <form action="" method="post">
+           <input type="text" name="topic" placeholder = "Search topic">
+         </form>
+     </div>
+
+     {% block body %}
+     {% endblock %}
+
+ </div>
