@@ -8,15 +8,17 @@
   overflow: auto;
 }
 
-.topnav span.title{
+.topnav a.title{
   display: block;
-  color: red;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 17px;
-  margin: auto;
-  width: 50%;
+  font-size: 20px;
+  font-weight: bold;
+}
+.topnav a.title:hover{
+  text-decoration: none;
+  background-color: #e9e9e9;
 }
 
 .topnav a {
@@ -24,7 +26,7 @@
   display: block;
   color: black;
   text-align: center;
-  padding: 14px 16px;
+  padding: 15px 16px;
   text-decoration: none;
   font-size: 17px;
 }
@@ -43,6 +45,7 @@
   display: block;
   float: right;
   padding: 6px;
+  margin-top:9px;
   margin-right: 16px;
   border: none;
   font-size: 17px;
