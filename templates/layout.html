@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>{% block title %}{% endblock %} - Story2Insta </title>
  <div class = page>
      <div class = "topnav">
@@ -7,9 +8,12 @@
          <!--<a href="{{ url_for('index') }}">Home</a>-->
          {% endblock %}
 
+     <div class="search-container">
          <form action="" method="post">
-           <input type="text" name="topic" placeholder = "Search topic">
+             <input type="text" name="topic" placeholder = "Search topic">
+             <button type="submit"><i class="fa fa-search"></i></button>
          </form>
+     </div>
      </div>
 
      {% block body %}

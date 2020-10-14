@@ -16,14 +16,6 @@ def index():
                         message = "No Topic Input"
         return render_template("index.html", message=message)
 
-# @app.route('/search', methods=['post', 'get'])
-# def index():
-#         message = ''
-#         if request.method == 'POST':
-#                 topic = request.form.get('topic')  # access the data inside
-#                 return redirect(topic)
-#                 # render_template(f"/{username}")
-#         return render_template("articles.html")
 
 @app.route('/<name>',  methods=['post', 'get'])
 def choose_article(name):
