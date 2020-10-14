@@ -35,8 +35,10 @@ def createImage(topic, loc):
     im.paste(img, (100,600))
     draw = ImageDraw.Draw(im)
     fontsFolder = 'FONT_FOLDER'
-    arialFont = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 60)
-    arialFontsM = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 50)
+    # arialFont = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 60)
+    arialFont = ImageFont.truetype('/Library/Fonts/Arial.ttf', 60)
+    # arialFontsM = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 50)
+    arialFontsM = ImageFont.truetype('/Library/Fonts/Arial.ttf', 50)
     draw.text((100, im.height/6), t, fill='white', font=arialFont)
     frontA, backA = split(d)
     draw.text((0, 1500), frontA, fill='white', font=arialFontsM)
