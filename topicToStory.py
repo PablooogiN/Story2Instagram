@@ -59,7 +59,7 @@ def createImage(topic, loc):
     draw.text((100, 1500), "\n".join(textwrap.wrap(d, width=50)), fill='black', font=arialFontsM)
     # # draw.text((0, 1600), backCaption, fill='black', font=arialFontsM)
 
-    new_name = "topic2instagram" + str(time.time()) + ".png"
+    new_name = "topic2instagram_" + str(time.time()) + ".png"
 
     for filename in os.listdir('static/'):
         if filename.startswith('topic2instagram_'):  # not to remove other images
