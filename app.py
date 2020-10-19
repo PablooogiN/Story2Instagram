@@ -9,6 +9,8 @@ def index():
         if request.method == 'POST':
                 topic = request.form.get('topic')  # access the data inside 
 
+                print(topic)
+
                 if topic is not "":
                         return redirect(topic)
                         # render_template(f"/{username}")
