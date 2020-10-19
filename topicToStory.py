@@ -5,6 +5,7 @@ from io import BytesIO
 import os
 import time
 import sys
+import textwrap
 
 
 def split(s):
@@ -23,6 +24,8 @@ def createImage(topic, loc):
 
     # return loc
 
+    # potentially play around w/ img resize to get uniform dimensions
+
     u = all_articles['articles'][location]['urlToImage']
     t = all_articles['articles'][location]['title']
     d = all_articles['articles'][location]['description']
@@ -31,17 +34,30 @@ def createImage(topic, loc):
     response = requests.get(u)
     img = Image.open(BytesIO(response.content))
 
-    im = Image.open('background.png')
-    im.paste(img, (100,600))
-    draw = ImageDraw.Draw(im)
     fontsFolder = 'FONT_FOLDER'
-    arialFont = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 60)
+    arialFont = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 50)
     arialFontsM = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 50)
-    draw.text((100, im.height/6), t, fill='white', font=arialFont)
-    frontA, backA = split(d)
-    draw.text((0, 1500), frontA, fill='white', font=arialFontsM)
-    draw.text((0, 1600), backA, fill='white', font=arialFontsM)
-    draw.text((0, 2200), url, fill='white', font=arialFontsM)
+    im = Image.open('background.png')
+    draw = ImageDraw.Draw(im)
+
+    draw.rectangle((40, 200, 1400, 40), fill="white")
+
+    draw.text((50, 50), "\n".join(textwrap.wrap(t, width=50)), fill='black', font=arialFont)
+    
+
+    draw.rectangle((40, 1400, 1400, 400), fill="white")
+    im.paste(img, (60,600))
+    draw.text((100, 1275), "\n".join(textwrap.wrap(url, width=50)), fill='black', font=arialFontsM)
+
+    # frontA, backA = split(d)
+
+    print(d)
+    # print(frontA)
+    # print(backA)
+
+    draw.rectangle((40, 1900, 1400, 1500), fill="white")
+    draw.text((100, 1500), "\n".join(textwrap.wrap(d, width=50)), fill='black', font=arialFontsM)
+    # # draw.text((0, 1600), backCaption, fill='black', font=arialFontsM)
 
     new_name = "topic2instagram" + str(time.time()) + ".png"
 
