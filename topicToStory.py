@@ -38,6 +38,7 @@ def createImage(topic, loc):
     newSize = (1920, 1080)
 
     img = img.resize(newSize)
+    img = img.crop((640, 0, 1280, 1080))
 
     print("img height " + str(img.height))
     print("img width " + str(img.width))
@@ -45,22 +46,45 @@ def createImage(topic, loc):
     imgHeight = img.height
     imgWidth = img.width
 
-    print(math.ceil(imgWidth / imgHeight))
-
     # fontsFolder = 'FONT_FOLDER'
     arialFont = ImageFont.truetype(r'C:\CSCE445\Story2Instagram\static\fonts\Roboto-Bold.ttf', math.ceil(imgWidth / imgHeight) * 25)
-    arialFontsM = ImageFont.truetype(r'C:\CSCE445\Story2Instagram\static\fonts\Roboto-Black.ttf', math.ceil(imgWidth / imgHeight) * 15)
+    arialFontsM = ImageFont.truetype(r'C:\CSCE445\Story2Instagram\static\fonts\Roboto-Black.ttf', math.ceil(imgWidth / imgHeight) * 25)
     # im = Image.open('background.png')
     draw = ImageDraw.Draw(img)
 
-    # draw.rectangle((40, 200, 1400, 40), fill="white")
+    # design idea for TAMU branding purposes
+    draw.rectangle((0, 0, 35, 360), fill=(0,60,113))
+    draw.rectangle((0, 360, 35, 720), fill=(91,98,54))
+    draw.rectangle((0, 720, 35, 1080), fill=(116,79,40))
 
-    draw.text((50, 50), "\n".join(textwrap.wrap(t,  width=math.ceil(imgHeight / 2))), fill='white', font=arialFont)
+    # article title background
+    draw.rectangle((60, 60, 610, 120), fill="black")
+    # article title
+    draw.rectangle((50, 50, 600, 110), fill="white")
+
+    draw.text((60, 50), "\n".join(textwrap.wrap(t,  width=45)), fill='black', font=arialFont)
     
+    # width = arialFont.getsize(t)[0]
+
+    # print(width)
+
+    # article desc background
+    draw.rectangle((210, 450, 600, 650), fill="black")
+    # article desc
+    draw.rectangle((200, 440, 590, 640), fill="white")
+
+    draw.text((210, 440), "\n".join(textwrap.wrap(d,  width=30)), fill='black', font=arialFontsM)
+
+    # article url background
+    draw.rectangle((60, 1010, 610, 1070), fill="black")
+    # article url
+    draw.rectangle((50, 1000, 600, 1060), fill="white")
+
+    draw.text((60, 1000), "\n".join(textwrap.wrap(url, width=45)), fill='black', font=arialFontsM)
+
 
     # draw.rectangle((40, 1400, 1400, 400), fill="white")
     # im.paste(img, (60,600))
-    draw.text((50, imgHeight - 50), "\n".join(textwrap.wrap(url, width=math.ceil(imgHeight / 2))), fill='white', font=arialFontsM)
 
     # frontA, backA = split(d)
 
@@ -69,7 +93,7 @@ def createImage(topic, loc):
     # print(backA)
 
     # draw.rectangle((40, 1900, 1400, 1500), fill="white")
-    draw.text((50, (imgHeight / 2) - 50), "\n".join(textwrap.wrap(d,  width=40)), fill='white', font=arialFontsM)
+
     # # draw.text((0, 1600), backCaption, fill='black', font=arialFontsM)
 
     new_name = "topic2instagram_" + str(time.time()) + ".png"
