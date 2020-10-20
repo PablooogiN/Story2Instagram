@@ -7,18 +7,23 @@
 </title>
 
 {% block topnav%}
-    <a href="{{ url_for('index') }}">Home</a>
+    <a class="active" href="{{ url_for('index') }}">Home</a>
 {% endblock %}
 
-
-
 <div>
-    {% block body %}
-        <img src="{{url_for('static', filename=picture)}}"width="500"/>
+    <div class="container">
+        {% block body %}
+        <br>
+        <br>
+        <br>
+        <div class="text-center">
+            <img src="{{url_for('static', filename=picture)}}" style="width: 25vw"/>
+        </div>
         <a href="{{url_for('static', filename=picture)}}" download="InstagramStory">
             <button class="btn"><i class="fa fa-download"></i> Download</button>
         </a>
-    {% endblock %}
+        {% endblock %}
+    </div>
 </div>
 
 <!-- download hyperlink -->
