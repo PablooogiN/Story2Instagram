@@ -48,7 +48,7 @@ def createImage(topic, loc):
     new_name = "topic2instagram" + str(time.time()) + ".png"
 
     for filename in os.listdir('static/'):
-        if filename.startswith('topic2instagram_'):  # not to remove other images
+        if filename.startswith('topic2instagram'):  # not to remove other images
             os.remove('static/' + filename)
 
     im.save('static/'+ new_name)
