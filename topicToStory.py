@@ -8,9 +8,9 @@ import sys
 import textwrap
 
 
-def split(s):
-    half, rem = divmod(len(s), 2)
-    return s[:half + rem], s[half + rem:]
+# def split(s):
+#     half, rem = divmod(len(s), 2)
+#     return s[:half + rem], s[half + rem:]
 
 def createImage(topic, loc):
     sys.tracebacklimit = 0
