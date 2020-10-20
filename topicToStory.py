@@ -6,6 +6,7 @@ import os
 import time
 import sys
 import textwrap
+import math
 
 
 # def split(s):
@@ -34,20 +35,32 @@ def createImage(topic, loc):
     response = requests.get(u)
     img = Image.open(BytesIO(response.content))
 
-    fontsFolder = 'FONT_FOLDER'
-    arialFont = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 50)
-    arialFontsM = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 50)
-    im = Image.open('background.png')
-    draw = ImageDraw.Draw(im)
+    newSize = (1920, 1080)
 
-    draw.rectangle((40, 200, 1400, 40), fill="white")
+    img = img.resize(newSize)
 
-    draw.text((50, 50), "\n".join(textwrap.wrap(t, width=50)), fill='black', font=arialFont)
+    print("img height " + str(img.height))
+    print("img width " + str(img.width))
+
+    imgHeight = img.height
+    imgWidth = img.width
+
+    print(math.ceil(imgWidth / imgHeight))
+
+    # fontsFolder = 'FONT_FOLDER'
+    arialFont = ImageFont.truetype(r'C:\CSCE445\Story2Instagram\static\fonts\Roboto-Bold.ttf', math.ceil(imgWidth / imgHeight) * 25)
+    arialFontsM = ImageFont.truetype(r'C:\CSCE445\Story2Instagram\static\fonts\Roboto-Black.ttf', math.ceil(imgWidth / imgHeight) * 15)
+    # im = Image.open('background.png')
+    draw = ImageDraw.Draw(img)
+
+    # draw.rectangle((40, 200, 1400, 40), fill="white")
+
+    draw.text((50, 50), "\n".join(textwrap.wrap(t,  width=math.ceil(imgHeight / 2))), fill='white', font=arialFont)
     
 
-    draw.rectangle((40, 1400, 1400, 400), fill="white")
-    im.paste(img, (60,600))
-    draw.text((100, 1275), "\n".join(textwrap.wrap(url, width=50)), fill='black', font=arialFontsM)
+    # draw.rectangle((40, 1400, 1400, 400), fill="white")
+    # im.paste(img, (60,600))
+    draw.text((50, imgHeight - 50), "\n".join(textwrap.wrap(url, width=math.ceil(imgHeight / 2))), fill='white', font=arialFontsM)
 
     # frontA, backA = split(d)
 
@@ -55,8 +68,8 @@ def createImage(topic, loc):
     # print(frontA)
     # print(backA)
 
-    draw.rectangle((40, 1900, 1400, 1500), fill="white")
-    draw.text((100, 1500), "\n".join(textwrap.wrap(d, width=50)), fill='black', font=arialFontsM)
+    # draw.rectangle((40, 1900, 1400, 1500), fill="white")
+    draw.text((50, (imgHeight / 2) - 50), "\n".join(textwrap.wrap(d,  width=40)), fill='white', font=arialFontsM)
     # # draw.text((0, 1600), backCaption, fill='black', font=arialFontsM)
 
     new_name = "topic2instagram_" + str(time.time()) + ".png"
@@ -65,5 +78,5 @@ def createImage(topic, loc):
         if filename.startswith('topic2instagram_'):  # not to remove other images
             os.remove('static/' + filename)
 
-    im.save('static/'+ new_name)
+    img.save('static/'+ new_name)
     return new_name
