@@ -9,6 +9,8 @@ def index():
         if request.method == 'POST':
                 topic = request.form.get('topic')  # access the data inside 
 
+                print(topic)
+
                 if topic is not "":
                         return redirect(topic)
                         # render_template(f"/{username}")
@@ -16,9 +18,14 @@ def index():
                         message = "No Topic Input"
         return render_template("index.html", message=message)
 
-@app.route('/<name>')
+
+@app.route('/<name>',  methods=['post', 'get'])
 def choose_article(name):
-        newsapi = NewsApiClient(api_key='87f90668eabb44b98fa88a4f007804b5')
+        if request.method == 'POST':
+                topic = request.form.get('topic')  # access the data inside
+                return redirect(topic)
+                # render_template(f"/{username}")
+        newsapi = NewsApiClient(api_key='be667b6da1734020a35b7c340f255a28')
         all_articles = newsapi.get_everything(q=name)
         return render_template("articles.html", topic=name, articles=all_articles['articles'])
 
