@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+<title>
+    {% block title %}
+        Choose Background
+    {% endblock %}
+</title>
+
+{% block topnav%}
+    <a class="active" href="{{ url_for('index') }}">Home</a>
+{% endblock %}
+
+{% block body %}
+    <!-- loop thru images in static/backgrounds and add the article photo as cards -->
+    {% for pic in backgrounds %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width: 25vw">
+                    <div class="card-body">
+                        <img class="card-img-top" src="static/backgrounds/{{pic}}" alt="background">
+                        <div class="card-body">
+                            <a class=" asButton btn-primary" href="{{ url_for('show_picture', topic=topic, id=id, back=pic) }}" role="button">Select Background</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

@@ -11,7 +11,7 @@ def split(s):
     half, rem = divmod(len(s), 2)
     return s[:half + rem], s[half + rem:]
 
-def createImage(topic, loc):
+def createImage(topic, loc, backgroundPath):
     sys.tracebacklimit = 0
     location = loc - 1
 
@@ -31,7 +31,7 @@ def createImage(topic, loc):
     response = requests.get(u)
     img = Image.open(BytesIO(response.content))
 
-    im = Image.open('background.png')
+    im = Image.open('static/backgrounds/' + backgroundPath)
     im.paste(img, (100,600))
     draw = ImageDraw.Draw(im)
     fontsFolder = 'FONT_FOLDER'
@@ -48,7 +48,7 @@ def createImage(topic, loc):
     new_name = "topic2instagram" + str(time.time()) + ".png"
 
     for filename in os.listdir('static/'):
-        if filename.startswith('topic2instagram_'):  # not to remove other images
+        if filename.startswith('topic2instagram'):  # not to remove other images
             os.remove('static/' + filename)
 
     im.save('static/'+ new_name)

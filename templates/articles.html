@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block topnav%}
-<a href="{{ url_for('index') }}">Home</a>
+<a class="active" href="{{ url_for('index') }}">Home</a>
 <a class = "title">
     Topic: {{topic}}
 </a>
@@ -19,12 +19,11 @@
         <div class="row">
             <div class="col">
                 <div class="card" style="width: 25vw">
-                    <img class="card-img-top" src="{{article.urlToImage}}" alt="{{article.title}}">
+                    <img class="card-img-top" src="{{article.urlToImage}}" alt="{{article.title}}"> <!-- save image of selected article-->
                     <div class="card-body">
                         <a class = "title" href="{{article.url}}" target="_blank">{{article.title}}</a>
                         <p class="card-text">{{article.description}}</p>
-                        <a class=" asButton btn-primary" href="{{ url_for('show_picture', topic=topic, id=loop.index) }}" role="button">Make Instagram Story</a>
-                        <!-- <a class="asButton" href="{{ url_for('show_picture', topic=topic, id=loop.index) }}" >Make Instagram Story</a> -->
+                        <a class=" asButton btn-primary" href="{{ url_for('choose_background', topic=topic, id=loop.index, picart=article.urlToImage) }}" role="button">Make Instagram Story</a>
                   </div>
                 </div>
             </div>
