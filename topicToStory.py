@@ -8,9 +8,64 @@ import sys
 import textwrap
 import math
 
-def split(s):
-    half, rem = divmod(len(s), 2)
-    return s[:half + rem], s[half + rem:]
+# def split(s):
+#     half, rem = divmod(len(s), 2)
+#     return s[:half + rem], s[half + rem:]
+
+# story for "normal" aspect ratio
+def createStory1(img, title, desc, url):
+    newSize = (1920, 1080)
+    img = img.resize(newSize)
+    croppedImg = img.crop((640, 0, 1280, 1080))
+
+    imgWidth = croppedImg.width
+    imgHeight = croppedImg.height
+    
+    fontsFolder = 'FONT_FOLDER'
+    arialFont = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 60)
+    arialFontsM = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 50)
+
+    draw = ImageDraw.Draw(croppedImg)
+
+    # design idea for TAMU branding purposes
+    draw.rectangle((0, 0, 35, 360), fill=(0,60,113))
+    draw.rectangle((0, 360, 35, 720), fill=(91,98,54))
+    draw.rectangle((0, 720, 35, 1080), fill=(116,79,40))
+
+    # article title background
+    draw.rectangle((60, 60, 610, 120), fill="black")
+    # article title
+    draw.rectangle((50, 50, 600, 110), fill="white")
+
+    draw.text((60, 50), "\n".join(textwrap.wrap(title,  width=45)), fill='black', font=arialFont)
+    
+    # width = arialFont.getsize(t)[0]
+
+    # print(width)
+
+    # article desc background
+    draw.rectangle((210, 450, 600, 650), fill="black")
+    # article desc
+    draw.rectangle((200, 440, 590, 640), fill="white")
+
+    draw.text((210, 440), "\n".join(textwrap.wrap(desc,  width=30)), fill='black', font=arialFontsM)
+
+    # article url background
+    draw.rectangle((60, 1010, 610, 1070), fill="black")
+    # article url
+    draw.rectangle((50, 1000, 600, 1060), fill="white")
+
+    draw.text((60, 1000), "\n".join(textwrap.wrap(url, width=45)), fill='black', font=arialFontsM)
+
+    return croppedImg
+
+# story for "not normal" aspect ratio
+def creatStory2():
+    backgroundImg = Image.open('background.png')
+    newSize = (1920, 1080)
+    backgroundImg = backgroundImg.resize(newSize)
+    newImg = backgroundImg.crop((640, 0, 1280, 1080))
+    return newImg
 
 def createStory1(img, title, desc, url):
     imgWidth = img.width
@@ -76,7 +131,7 @@ def createImage(topic, loc, backgroundPath):
     sys.tracebacklimit = 0
     location = loc - 1
 
-    newsapi = NewsApiClient(api_key='be667b6da1734020a35b7c340f255a28')
+    newsapi = NewsApiClient(api_key='87f90668eabb44b98fa88a4f007804b5')
     # articleTopic = input('Enter Topic:')
     all_articles = newsapi.get_everything(q=topic)
 
@@ -84,39 +139,25 @@ def createImage(topic, loc, backgroundPath):
 
     # return loc
 
+    # potentially play around w/ img resize to get uniform dimensions
+
     u = all_articles['articles'][location]['urlToImage']
     t = all_articles['articles'][location]['title']
     d = all_articles['articles'][location]['description']
     url = all_articles['articles'][location]['url']
 
+
     response = requests.get(u)
+    
     img = Image.open(BytesIO(response.content)) # article image
 
     im = Image.open('static/backgrounds/' + backgroundPath) # background image
 
     storyImg = im
     if(backgroundPath == "articlepic.png"):
-        # newSize = (2720, 2960)
-        # im = im.resize(newSize)
-        # im = im.crop((640, 0, 2080, 2960))
         storyImg = createStory1(im, t, d, url)
     else:
         storyImg = createStory2(im, img, t, d, url)
-
-    # old code beginning
-    # im.paste(img, (100,600))
-    # draw = ImageDraw.Draw(im)
-    # fontsFolder = 'FONT_FOLDER'
-    # # arialFont = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 60)
-    # arialFont = ImageFont.truetype('/Library/Fonts/Arial.ttf', 60)
-    # # arialFontsM = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 50)
-    # arialFontsM = ImageFont.truetype('/Library/Fonts/Arial.ttf', 50)
-    # draw.text((100, im.height/6), t, fill='white', font=arialFont)
-    # frontA, backA = split(d)
-    # draw.text((0, 1500), frontA, fill='white', font=arialFontsM)
-    # draw.text((0, 1600), backA, fill='white', font=arialFontsM)
-    # draw.text((0, 2200), url, fill='white', font=arialFontsM)
-    # old code ending
 
     new_name = "topic2instagram" + str(time.time()) + ".png"
 
@@ -124,5 +165,6 @@ def createImage(topic, loc, backgroundPath):
         if filename.startswith('topic2instagram'):  # not to remove other images
             os.remove('static/' + filename)
 
-    im.save('static/'+ new_name)
+    storyImg.save('static/' + new_name)
+    
     return new_name
