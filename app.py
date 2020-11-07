@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from topicToStory import *
 import time
 import os
-import urllib2 as urllib
+import urllib.request as urllib
 app = Flask(__name__)
 
 @app.route('/', methods=['post', 'get'])
@@ -53,6 +53,15 @@ def choose_background():
         pics = os.listdir('static/backgrounds/')
         return render_template("background.html", backgrounds=pics, topic=name, id=indexx, picart=picid)
 
+@app.after_request
+def add_header(response):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    response.headers['Cache-Control'] = 'public, no-store, max-age=0'
+    return response
 
 if __name__ == '__main__':
         app.run()

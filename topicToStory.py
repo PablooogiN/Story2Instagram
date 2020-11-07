@@ -18,8 +18,11 @@ def createStory1(img, title, desc, url):
 
     # robotoBold = ImageFont.truetype('/Library/Fonts/Arial.ttf', int(math.ceil(imgWidth / imgHeight) * 25))
     # robotoNorm = ImageFont.truetype('/Library/Fonts/Arial.ttf', int(math.ceil(imgWidth / imgHeight) * 25))
-    arialFont = ImageFont.truetype('/Library/Fonts/Arial.ttf', 60)
-    arialFontsM = ImageFont.truetype('/Library/Fonts/Arial.ttf', 50)
+    fontsFolder = 'FONT_FOLDER'
+    arialFont = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 60)
+    arialFontsM = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 50)
+    # arialFont = ImageFont.truetype('/Library/Fonts/Arial.ttf', 60)
+    # arialFontsM = ImageFont.truetype('/Library/Fonts/Arial.ttf', 50)
 
     draw = ImageDraw.Draw(img)
 
@@ -56,10 +59,10 @@ def createStory2(im, artIm, t, d, url):
     im.paste(artIm, (100,625))
     draw = ImageDraw.Draw(im)
     fontsFolder = 'FONT_FOLDER'
-    # arialFont = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 60)
-    arialFont = ImageFont.truetype('/Library/Fonts/Arial.ttf', 60)
-    # arialFontsM = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 50)
-    arialFontsM = ImageFont.truetype('/Library/Fonts/Arial.ttf', 50)
+    arialFont = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 60)
+    # arialFont = ImageFont.truetype('/Library/Fonts/Arial.ttf', 60)
+    arialFontsM = ImageFont.truetype(os.path.join(fontsFolder, 'arial.ttf'), 50)
+    # arialFontsM = ImageFont.truetype('/Library/Fonts/Arial.ttf', 50)
     draw.text((100, im.height/6), "\n".join(textwrap.wrap(t, width=45)), fill='white', font=arialFont)
     frontA, backA = split(d)
     # draw.text((100, 1500), "\n".join(textwrap.wrap(frontA, width=45)), fill='white', font=arialFontsM)
