@@ -48,9 +48,9 @@ def choose_background():
         # save picid to static/backgrounds
         fd = urllib.urlopen(picid)
         p = Image.open(BytesIO(fd.read()))
-        newSize = (2720, 2960)
+        newSize = (1920, 1080)
         p = p.resize(newSize)
-        croppedImg = p.crop((640, 0, 2080, 2960))
+        croppedImg = p.crop((640, 0, 1280, 1080))
         croppedImg = croppedImg.save("static/backgrounds/articlepic.png")
         pics = os.listdir('static/backgrounds/')
         return render_template("background.html", backgrounds=pics, topic=name, id=indexx, picart=picid)
