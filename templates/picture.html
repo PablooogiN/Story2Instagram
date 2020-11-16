@@ -10,30 +10,24 @@
     <a class="active" href="{{ url_for('index') }}">Home</a>
 {% endblock %}
 
-<div>
+{% block body %}
     <div class="container">
-        {% block body %}
         <br>
         <br>
         <br>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col">
                 <div class="text-center">
-                    <img class="img-fluid" src="{{url_for('static', filename=picture[0])}}" style="width: 25vw"/>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="text-center">
-                    <img class="img-fluid" src="{{url_for('static', filename=picture[1])}}" style="width: 25vw"/>
+                    <img src="{{url_for('static', filename=picture)}}" style="width: 25vw"/>
                 </div>
             </div>
         </div>
-        <a href="{{url_for('static', filename=picture[0])}}" download="InstagramStory">
-            <button class="btn"><i class="fa fa-download"></i> Download</button>
-        </a>
-        {% endblock %}
     </div>
-</div>
+    
+    <a href="{{url_for('static', filename=picture)}}" download="InstagramStory">
+        <button class="btn"><i class="fa fa-download"></i> Download</button>
+    </a>
+{% endblock %}
 
 <!-- download hyperlink -->
 <!-- <form method="get" action="{{url_for('static', filename=picture)}}">

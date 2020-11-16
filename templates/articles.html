@@ -26,8 +26,7 @@
                     <div class="card-body">
                         <a class = "title" href="{{article.url}}" target="_blank">{{article.title}}</a>
                         <p class="card-text">{{article.description}}</p>
-                        <a class=" asButton btn-primary" href="{{ url_for('show_picture', topic=topic, id=loop.index) }}" role="button">Make Instagram Story</a>
-                        <!-- <a class="asButton" href="{{ url_for('show_picture', topic=topic, id=loop.index) }}" >Make Instagram Story</a> -->
+                        <a class=" asButton btn-primary" href="{{ url_for('choose_background', topic=topic, id=loop.index, picart=article.urlToImage) }}" role="button">Make Instagram Story</a>
                   </div>
                 </div>
             </div>
