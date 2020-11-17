@@ -184,3 +184,11 @@ a.asButton:hover, a.asButton:active {
 .btn:hover {
   background-color: RoyalBlue;
 }
+
+.mainSearch{
+  padding-top: 35vh;
+}
+
+.maintitle{
+  font-size: 55px;
+}

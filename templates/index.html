@@ -14,13 +14,14 @@
         {% if message %}
         <p class = "message">{{ message }}</p>
         {% endif %}
-
-        <form action="" method="post">
-            <label class = "prompt" for="username">Turn a news article into an Instagram Story:</label>
-            <p>
-                <input type="text" name="topic" placeholder = "Search topic">
-                <button type="submit"><i class="fa fa-search"></i>Search</button>
-            </p>
-        </form>
+        <div class = "mainSearch">
+            <form action="" method="post">
+                <label class = "prompt" for="username"><h3 class= "maintitle">Turn a news article into an Instagram Story</h3></label>
+                <p>
+                    <input type="text" name="topic" placeholder = "Search topic">
+                    <button type="submit"><i class="fa fa-search"></i>Search</button>
+                </p>
+            </form>
+        </div>
     </div>
 {% endblock %}
